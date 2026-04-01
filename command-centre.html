@@ -8,71 +8,51 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0f11;
-    --bg2: #161719;
-    --bg3: #1e2023;
-    --bg4: #26282c;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #e8e6e1;
-    --text2: #9b9890;
-    --text3: #5e5c58;
-    --accent: #e8c547;
-    --accent2: rgba(232,197,71,0.12);
-    --red: #e85547;
-    --red2: rgba(232,85,71,0.12);
-    --blue: #5b9cf6;
-    --blue2: rgba(91,156,246,0.12);
-    --green: #52c97a;
-    --green2: rgba(82,201,122,0.12);
-    --orange: #f0873a;
-    --orange2: rgba(240,135,58,0.12);
-    --radius: 10px;
-    --radius-sm: 6px;
+    --bg: #0e0f11; --bg2: #161719; --bg3: #1e2023; --bg4: #26282c;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+    --text: #e8e6e1; --text2: #9b9890; --text3: #5e5c58;
+    --accent: #e8c547; --accent2: rgba(232,197,71,0.12);
+    --red: #e85547; --red2: rgba(232,85,71,0.12);
+    --blue: #5b9cf6; --blue2: rgba(91,156,246,0.12);
+    --green: #52c97a; --green2: rgba(82,201,122,0.12);
+    --orange: #f0873a; --orange2: rgba(240,135,58,0.12);
+    --radius: 10px; --radius-sm: 6px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; }
 
-  /* Layout */
-  .app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+  .app { display: grid; grid-template-rows: auto 1fr auto; height: 100vh; }
   .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100; }
   .topbar-left { display: flex; align-items: center; gap: 16px; }
   .logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.08em; }
   .topbar-meta { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
   .topbar-right { display: flex; align-items: center; gap: 10px; }
-
   .sync-btn { display: flex; align-items: center; gap: 7px; padding: 7px 16px; background: var(--accent); color: #000; border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
   .sync-btn:hover { opacity: 0.85; }
   .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .sync-btn .spin { display: inline-block; animation: spin 0.8s linear infinite; }
+  .spin { display: inline-block; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .main { display: grid; grid-template-columns: 260px 1fr; height: 100%; overflow: hidden; }
-
-  /* Sidebar */
+  .main { display: grid; grid-template-columns: 260px 1fr; overflow: hidden; }
   .sidebar { background: var(--bg2); border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 0; }
   .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-track { background: transparent; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
-
   .section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--text3); padding: 12px 18px 6px; text-transform: uppercase; }
   .nav-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 18px; cursor: pointer; border-left: 2px solid transparent; transition: all 0.1s; }
   .nav-item:hover { background: var(--bg3); }
   .nav-item.active { background: var(--bg3); border-left-color: var(--accent); }
   .nav-item-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
   .nav-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; }
-  .nav-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .nav-preview { font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  .nav-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+  .nav-preview { font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
   .nav-badge { font-size: 10px; font-family: 'DM Mono', monospace; padding: 2px 6px; border-radius: 10px; flex-shrink: 0; }
   .badge-p1 { background: var(--red2); color: var(--red); }
   .badge-p2 { background: var(--orange2); color: var(--orange); }
   .badge-fyi { background: var(--bg4); color: var(--text3); }
-  .badge-respond { background: var(--blue2); color: var(--blue); }
+  .sidebar-sep { height: 1px; background: var(--border); margin: 8px 18px; }
 
-  /* Content */
   .content { overflow-y: auto; padding: 24px; }
   .content::-webkit-scrollbar { width: 4px; }
-  .content::-webkit-scrollbar-track { background: transparent; }
   .content::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
 
   .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; gap: 12px; }
@@ -80,27 +60,24 @@
   .empty-title { font-size: 15px; color: var(--text2); }
   .empty-sub { font-size: 13px; color: var(--text3); text-align: center; max-width: 300px; line-height: 1.6; }
 
-  /* Stats row */
   .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
   .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
   .stat-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
   .stat-val { font-size: 26px; font-weight: 600; color: var(--text); }
   .stat-val.danger { color: var(--red); }
   .stat-val.info { color: var(--blue); }
-  .stat-val.warn { color: var(--orange); }
 
-  /* Filter pills */
   .filter-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
   .filter-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
   .pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; border: 1px solid var(--border); color: var(--text2); background: transparent; transition: all 0.1s; }
   .pill:hover { border-color: var(--border2); color: var(--text); }
   .pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
 
-  /* Case cards */
   .cases-list { display: flex; flex-direction: column; gap: 8px; }
   .case-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.15s; }
   .case-card:hover { border-color: var(--border2); }
   .case-card.expanded { border-color: var(--accent); }
+  .case-card.snoozed { opacity: 0.3; pointer-events: none; }
 
   .case-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; }
   .case-priority-col { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 2px; min-width: 36px; }
@@ -117,27 +94,23 @@
   .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-family: 'DM Mono', monospace; }
   .tag-respond { background: var(--blue2); color: var(--blue); }
   .tag-fyi { background: var(--bg4); color: var(--text3); }
-  .tag-todo { background: var(--green2); color: var(--green); }
   .tag-attach { background: var(--orange2); color: var(--orange); }
   .tag-section { background: var(--bg4); color: var(--text3); }
   .case-time { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; white-space: nowrap; margin-left: auto; padding-top: 2px; }
+  .chevron { font-size: 10px; color: var(--text3); transition: transform 0.2s; display: block; }
+  .case-card.expanded .chevron { transform: rotate(180deg); }
 
-  /* Case body */
   .case-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
   .case-card.expanded .case-body { display: block; }
-
   .block { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px; margin-top: 12px; }
   .block-label { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; margin-bottom: 8px; }
   .block-text { font-size: 13px; color: var(--text); line-height: 1.6; }
-
   .links-list { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
   .link-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--blue); cursor: pointer; text-decoration: none; }
-  .link-item:hover { opacity: 0.8; }
 
-  /* Draft */
   .draft-section { margin-top: 12px; }
   .draft-label { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; margin-bottom: 8px; }
-  .draft-textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); resize: vertical; min-height: 90px; line-height: 1.6; transition: border-color 0.15s; }
+  .draft-textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); resize: vertical; min-height: 90px; line-height: 1.6; }
   .draft-textarea:focus { outline: none; border-color: var(--border2); }
 
   .action-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
@@ -150,51 +123,50 @@
   .btn-danger:hover { background: var(--red2); }
   .btn-green { color: var(--green); border-color: rgba(82,201,122,0.3); }
   .btn-green:hover { background: var(--green2); }
-
   .status-msg { font-size: 12px; margin-top: 8px; font-family: 'DM Mono', monospace; display: none; }
-  .status-ok { color: var(--green); }
-  .status-err { color: var(--red); }
-  .status-info { color: var(--text3); }
+  .status-ok { color: var(--green); display: block !important; }
+  .status-err { color: var(--red); display: block !important; }
+  .status-info { color: var(--text3); display: block !important; }
 
-  /* Loading */
-  .loading-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0; gap: 12px; }
-  .loader { width: 24px; height: 24px; border: 2px solid var(--bg4); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  .loading-text { font-size: 13px; color: var(--text3); font-family: 'DM Mono', monospace; }
-
-  /* Tabs (top-level) */
   .view-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-  .view-tab { padding: 10px 18px; font-size: 13px; cursor: pointer; color: var(--text3); border-bottom: 2px solid transparent; transition: all 0.15s; font-family: 'DM Mono', monospace; letter-spacing: 0.03em; }
+  .view-tab { padding: 10px 18px; font-size: 13px; cursor: pointer; color: var(--text3); border-bottom: 2px solid transparent; transition: all 0.15s; font-family: 'DM Mono', monospace; }
   .view-tab:hover { color: var(--text2); }
   .view-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Collapsed indicator */
-  .chevron { font-size: 10px; color: var(--text3); margin-left: auto; flex-shrink: 0; transition: transform 0.2s; }
-  .case-card.expanded .chevron { transform: rotate(180deg); }
-
-  /* Snooze fade */
-  .case-card.snoozed { opacity: 0.3; pointer-events: none; }
-
-  /* Separator in sidebar */
-  .sidebar-sep { height: 1px; background: var(--border); margin: 8px 18px; }
-
-  /* Scrollable area for long overview */
-  .overview-panel { max-height: 100%; }
-
-  /* Responsive tweaks */
-  @media (max-width: 900px) {
-    .main { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-  }
+  /* ── Debug Logger ─────────────────────────────────────────── */
+  .logger { background: var(--bg2); border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .logger-bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 16px; cursor: pointer; border-bottom: 1px solid transparent; }
+  .logger-bar:hover { background: var(--bg3); }
+  .logger-bar.open { border-bottom-color: var(--border); }
+  .logger-title { color: var(--text3); display: flex; align-items: center; gap: 8px; }
+  .logger-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
+  .logger-dot.ok { background: var(--green); }
+  .logger-dot.err { background: var(--red); }
+  .logger-dot.warn { background: var(--orange); }
+  .logger-actions { display: flex; gap: 8px; align-items: center; }
+  .logger-clear { font-size: 10px; color: var(--text3); cursor: pointer; padding: 2px 8px; border: 1px solid var(--border); border-radius: 4px; }
+  .logger-clear:hover { color: var(--text2); border-color: var(--border2); }
+  .logger-panel { display: none; max-height: 200px; overflow-y: auto; padding: 8px 0; }
+  .logger-panel.open { display: block; }
+  .logger-panel::-webkit-scrollbar { width: 4px; }
+  .logger-panel::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
+  .log-entry { display: flex; gap: 12px; padding: 3px 16px; align-items: baseline; }
+  .log-entry:hover { background: var(--bg3); }
+  .log-time { color: var(--text3); flex-shrink: 0; font-size: 10px; }
+  .log-level { flex-shrink: 0; font-size: 10px; padding: 1px 5px; border-radius: 3px; }
+  .log-level.INFO { background: var(--blue2); color: var(--blue); }
+  .log-level.OK { background: var(--green2); color: var(--green); }
+  .log-level.WARN { background: var(--orange2); color: var(--orange); }
+  .log-level.ERR { background: var(--red2); color: var(--red); }
+  .log-msg { color: var(--text2); font-size: 11px; line-height: 1.5; word-break: break-all; }
 </style>
 </head>
 <body>
 <div class="app">
 
-  <!-- Top bar -->
+  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-left">
       <div class="logo">COMMAND CENTRE</div>
@@ -207,9 +179,9 @@
     </div>
   </div>
 
+  <!-- Main -->
   <div class="main">
-
-    <!-- Sidebar: chat list -->
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <div class="section-label">Customer</div>
       <div id="nav-Customer"></div>
@@ -230,75 +202,139 @@
       <div id="nav-Chats"></div>
     </div>
 
-    <!-- Main content area -->
+    <!-- Content -->
     <div class="content" id="content-area">
       <div class="empty-state" id="empty-state">
         <div class="empty-icon">⌖</div>
         <div class="empty-title">Teams Command Centre</div>
-        <div class="empty-sub">Click "Sync Teams" to pull all unread messages and triage them by priority.</div>
+        <div class="empty-sub">Click "Sync Teams" to pull all unread messages and triage by priority.</div>
       </div>
-
-      <!-- Overview panel shown after sync -->
       <div id="overview-panel" style="display:none">
         <div class="view-tabs">
-          <div class="view-tab active" onclick="showView('respond', this)">Respond</div>
-          <div class="view-tab" onclick="showView('fyi', this)">FYI</div>
-          <div class="view-tab" onclick="showView('all', this)">All cases</div>
+          <div class="view-tab active" onclick="showView('respond',this)">Respond</div>
+          <div class="view-tab" onclick="showView('fyi',this)">FYI</div>
+          <div class="view-tab" onclick="showView('all',this)">All cases</div>
         </div>
-
         <div class="stats-row" id="stats-row"></div>
         <div class="filter-row">
           <span class="filter-label">filter:</span>
-          <span class="pill active" onclick="applyFilter('all', this)">All</span>
-          <span class="pill" onclick="applyFilter('P1', this)">P1 — @mentioned</span>
-          <span class="pill" onclick="applyFilter('P2', this)">P2 — @everyone</span>
-          <span class="pill" onclick="applyFilter('Customer', this)">Customer</span>
-          <span class="pill" onclick="applyFilter('Favourites', this)">Favourites</span>
-          <span class="pill" onclick="applyFilter('Product', this)">Product</span>
-          <span class="pill" onclick="applyFilter('EFM', this)">EFM</span>
+          <span class="pill active" onclick="applyFilter('all',this)">All</span>
+          <span class="pill" onclick="applyFilter('P1',this)">P1 — @mentioned</span>
+          <span class="pill" onclick="applyFilter('P2',this)">P2 — @everyone</span>
+          <span class="pill" onclick="applyFilter('Customer',this)">Customer</span>
+          <span class="pill" onclick="applyFilter('Favourites',this)">Favourites</span>
+          <span class="pill" onclick="applyFilter('Product',this)">Product</span>
+          <span class="pill" onclick="applyFilter('EFM',this)">EFM</span>
         </div>
         <div class="cases-list" id="cases-list"></div>
       </div>
-
-      <!-- Single case detail panel -->
-      <div id="detail-panel" style="display:none"></div>
     </div>
-
   </div>
+
+  <!-- Debug Logger -->
+  <div class="logger">
+    <div class="logger-bar" id="logger-bar" onclick="toggleLogger()">
+      <div class="logger-title">
+        <span class="logger-dot" id="logger-dot"></span>
+        <span id="logger-status">debug console</span>
+      </div>
+      <div class="logger-actions">
+        <span class="logger-clear" onclick="event.stopPropagation(); clearLogs()">clear</span>
+        <span id="logger-chevron" style="color:var(--text3)">▴</span>
+      </div>
+    </div>
+    <div class="logger-panel" id="logger-panel"></div>
+  </div>
+
 </div>
 
 <script>
 const CLAUDE_API = "https://api.anthropic.com/v1/messages";
 const MCP_M365 = "https://microsoft365.mcp.claude.com/mcp";
-
-// Section priority order for triage
 const SECTION_ORDER = ['Customer','Favourites','Active Follow-ups','Product','EFM','Chats'];
-
-// People in Favourites who trigger P1 escalation
-const VIP_NAMES = ['vivek','adi','arun','ashwin','ian','vivek malipatil','adi bhashyam','arun r'];
+const API_TIMEOUT_MS = 25000;
 
 let allCases = [];
 let activeView = 'respond';
 let activeFilter = 'all';
-let selectedCaseId = null;
+let loggerOpen = false;
+let lastLogLevel = 'INFO';
 
-// ── Sync ──────────────────────────────────────────────────────────────────────
+// ── Logger ──────────────────────────────────────────────────────────────────
+
+function log(msg, level='INFO') {
+  lastLogLevel = level;
+  const panel = document.getElementById('logger-panel');
+  const dot = document.getElementById('logger-dot');
+  const statusEl = document.getElementById('logger-status');
+  const now = new Date();
+  const ts = now.toTimeString().substring(0,8);
+
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-time">${ts}</span><span class="log-level ${level}">${level}</span><span class="log-msg">${msg}</span>`;
+  panel.appendChild(entry);
+  panel.scrollTop = panel.scrollHeight;
+
+  // Update dot colour
+  if (level === 'ERR') { dot.className = 'logger-dot err'; statusEl.textContent = 'error — expand for details'; }
+  else if (level === 'WARN') { dot.className = 'logger-dot warn'; statusEl.textContent = 'warning'; }
+  else if (level === 'OK') { dot.className = 'logger-dot ok'; statusEl.textContent = 'all good'; }
+  else { dot.className = 'logger-dot'; statusEl.textContent = 'debug console'; }
+
+  // Auto-open on errors
+  if (level === 'ERR' && !loggerOpen) toggleLogger();
+}
+
+function toggleLogger() {
+  loggerOpen = !loggerOpen;
+  const panel = document.getElementById('logger-panel');
+  const bar = document.getElementById('logger-bar');
+  const chev = document.getElementById('logger-chevron');
+  panel.classList.toggle('open', loggerOpen);
+  bar.classList.toggle('open', loggerOpen);
+  chev.textContent = loggerOpen ? '▾' : '▴';
+}
+
+function clearLogs() {
+  document.getElementById('logger-panel').innerHTML = '';
+  document.getElementById('logger-dot').className = 'logger-dot';
+  document.getElementById('logger-status').textContent = 'debug console';
+}
+
+// ── Timeout wrapper ─────────────────────────────────────────────────────────
+
+function withTimeout(promise, ms, label) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`Timeout after ${ms}ms: ${label}`)), ms))
+  ]);
+}
+
+// ── Sync ─────────────────────────────────────────────────────────────────────
 
 async function syncAll() {
   const btn = document.getElementById('sync-btn');
   const icon = document.getElementById('sync-icon');
   btn.disabled = true;
   icon.classList.add('spin');
-  icon.textContent = '↻';
   document.getElementById('sync-meta').textContent = 'syncing...';
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('overview-panel').style.display = 'none';
-  showGlobalLoading('Reading Teams messages...');
+
+  log('Sync started', 'INFO');
+  log(`Claude API endpoint: ${CLAUDE_API}`, 'INFO');
+  log(`M365 MCP endpoint: ${MCP_M365}`, 'INFO');
 
   try {
-    allCases = await fetchAndTriageTeams();
+    log('Calling Claude API with M365 MCP tools...', 'INFO');
+    allCases = await withTimeout(fetchAndTriageTeams(), API_TIMEOUT_MS, 'fetchAndTriageTeams');
+    log(`API returned ${allCases.length} cases`, 'OK');
   } catch(e) {
+    log(`API call failed: ${e.message}`, 'ERR');
+    log('Falling back to demo data', 'WARN');
     allCases = getDemoData();
+    log(`Loaded ${allCases.length} demo cases`, 'WARN');
   }
 
   renderSidebar();
@@ -306,112 +342,127 @@ async function syncAll() {
 
   const now = new Date();
   document.getElementById('sync-meta').textContent = 'synced ' + now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('overview-panel').style.display = 'block';
   btn.disabled = false;
   icon.classList.remove('spin');
-  icon.textContent = '↻';
-  document.getElementById('overview-panel').style.display = 'block';
-  document.getElementById('detail-panel').style.display = 'none';
-  hideGlobalLoading();
+  log('Render complete', 'OK');
 }
 
 async function fetchAndTriageTeams() {
-  const systemPrompt = `You are a Teams inbox triage assistant for Anish Namasivayam, senior PM at Motorq.
+  log('Building API request body...', 'INFO');
+  const body = {
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1000,
+    system: `You are a Teams inbox triage assistant for Anish Namasivayam, senior PM at Motorq.
+Use the Microsoft 365 MCP tools to list Teams chats/channels with unread messages, fetch recent messages, and triage.
 
-Use the Microsoft 365 MCP tools to list all Teams chats and channels with unread messages, then fetch recent messages for each.
+Section mapping (use these exact strings):
+Customer: Carvana Bridgecrest, Demo Portal Prod|Engg, MA GTM Rec Engine, Mike Albert MAFS, Weekly AI GTM, Alex Netto, EFM Team internal, Fuse Rec Engine, Fuse Beta Programs
+Favourites: Innovation-Engg|Prod, Weekly AI sync, General Motorq AI, Vivek Malipatil, Adi Bhashyam, Anish-Adi 1:1, Arun R, Vishnu Priyan AJ, Andrew and Vivek, Andrew and Ian
+Active Follow-ups: On-call Engineering, Fleet Portal Loading, Product AI Bootcamp, Enroll Workflow, Hyundai OEM, UI Release
+Product: Product Team Internal, Chitranshi, Haripriya, Vishnu-Anish sync, Esha Gupta, Motorq India Product, Vanshika, Raja, Scrum Applications
+EFM: EFM Core AI, Internal EFM Launch Syncs, EFM App changes, Technical Working Group, EFM CS/DS
+Chats: everything else
 
-Teams section structure (in priority order):
-- Customer: Carvana Bridgecrest, Demo Portal Prod|Engg, Demo Portal Dedicated Support, MA GTM Rec Engine, Mike Albert MAFS, Weekly AI GTM, Alex Netto, EFM Team internal, Fuse Rec Engine Prod|CS|Mark, Fuse Beta Programs
-- Favourites: Innovation-Engg|Prod, Weekly AI sync, General Motorq AI, Vivek Malipatil, Adi Bhashyam, Anish-Adi 1:1, Arun R, Vishnu Priyan AJ, Andrew and Vivek, Andrew and Ian
-- Active Follow-ups: On-call Engineering, Fleet Portal Loading, Product AI Bootcamp, Enroll Workflow CS, Hyundai OEM, UI Release Discussions
-- Product: Product Team Internal, Chitranshi, Haripriya, Vishnu-Anish sync, Esha Gupta, Motorq India Product
-- EFM: EFM Core AI, Internal EFM Launch Syncs, EFM App changes, Technical Working Group
-- Chats: everything else
+Priority: P1=direct @Anish mention OR message from Vivek/Adi/Arun/Ashwin/Ian. P2=@everyone/@channel. FYI=everything else.
 
-Priority rules:
-- P1: Anish (@Anish or @Anish Namasivayam) is directly mentioned in the unread messages
-- P2: @everyone or @channel is tagged
-- FYI: no direct mention, just unread
+Return ONLY valid JSON array, no markdown:
+[{"id":"unique","from":"name","section":"Customer|Favourites|Active Follow-ups|Product|EFM|Chats","subject":"topic","preview":"snippet max 80 chars","priority":"P1|P2|FYI","type":"respond|fyi","time":"relative","hasAttachment":false,"links":[],"summary":"2-3 sentences what this is and what Anish needs to do","draftReply":"brief reply in Anish voice, empty if fyi"}]
 
-Favourites VIPs (Vivek, Adi, Arun, Ashwin, Ian) — any unread from them defaults to P1 even without @mention.
+Max 20 items. If tools unavailable return [].`,
+    messages: [{ role: 'user', content: 'Fetch and triage all unread Teams messages for Anish Namasivayam.' }],
+    mcp_servers: [{ type: 'url', url: MCP_M365, name: 'm365' }]
+  };
 
-Return ONLY a JSON array, no markdown, no explanation:
-[{
-  "id": "unique string",
-  "from": "display name of person or channel",
-  "section": "Customer|Favourites|Active Follow-ups|Product|EFM|Chats",
-  "subject": "topic or channel name",
-  "preview": "last message snippet max 80 chars",
-  "priority": "P1|P2|FYI",
-  "type": "respond|fyi",
-  "time": "relative like 2h ago or today 9:33am",
-  "hasAttachment": false,
-  "links": ["url1"],
-  "summary": "2-3 sentences: what is this about and what does Anish need to do",
-  "draftReply": "suggested reply in Anish's voice — direct, brief, no filler. Empty string if type=fyi",
-  "mentionedMe": true
-}]
-
-Return up to 20 most important unread items. If M365 tools are unavailable, return an empty array [].`;
-
-  const response = await fetch(CLAUDE_API, {
+  log('Sending fetch request to Anthropic...', 'INFO');
+  const resp = await fetch(CLAUDE_API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: 'Fetch and triage all unread Teams messages for Anish Namasivayam now.' }],
-      mcp_servers: [{ type: 'url', url: MCP_M365, name: 'm365' }]
-    })
+    body: JSON.stringify(body)
   });
 
-  const data = await response.json();
-  const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+  log(`HTTP response status: ${resp.status} ${resp.statusText}`, resp.ok ? 'INFO' : 'ERR');
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+
+  const data = await resp.json();
+  log(`Response content blocks: ${(data.content||[]).length}`, 'INFO');
+
+  if (data.error) {
+    log(`API error: ${data.error.type} — ${data.error.message}`, 'ERR');
+    throw new Error(data.error.message);
+  }
+
+  const textBlocks = (data.content || []).filter(b => b.type === 'text');
+  const mcpBlocks = (data.content || []).filter(b => b.type === 'mcp_tool_use' || b.type === 'mcp_tool_result');
+  log(`Text blocks: ${textBlocks.length}, MCP blocks: ${mcpBlocks.length}`, 'INFO');
+
+  const text = textBlocks.map(b => b.text).join('');
+  log(`Raw text length: ${text.length} chars`, 'INFO');
+
+  if (text.length < 5) {
+    log('No usable text returned — MCP may not have authenticated', 'WARN');
+    throw new Error('Empty response from API');
+  }
+
   const clean = text.replace(/```json|```/g, '').trim();
-  const parsed = JSON.parse(clean);
-  return Array.isArray(parsed) && parsed.length > 0 ? parsed : getDemoData();
+  let parsed;
+  try {
+    parsed = JSON.parse(clean);
+    log(`Parsed ${parsed.length} cases from JSON`, 'OK');
+  } catch(e) {
+    log(`JSON parse failed: ${e.message}`, 'ERR');
+    log(`Raw snippet: ${clean.substring(0,120)}`, 'INFO');
+    throw new Error('JSON parse error');
+  }
+
+  if (!Array.isArray(parsed) || parsed.length === 0) {
+    log('API returned empty array — M365 MCP not connected or no unreads', 'WARN');
+    throw new Error('Empty cases array');
+  }
+
+  return parsed;
 }
 
-// ── Demo data (used when M365 not accessible yet) ────────────────────────────
+// ── Demo data ─────────────────────────────────────────────────────────────────
 
 function getDemoData() {
   return [
-    { id:'c1', from:'Vivek Malipatil', section:'Favourites', subject:'Adi sync — Fuse positioning', preview:'@Anish can you confirm the enterprise-first sequencing before Thursday', priority:'P1', type:'respond', time:'45m ago', hasAttachment:false, links:[], summary:'Vivek needs you to confirm the enterprise-first positioning for Fuse before Adi\'s Thursday touchpoint. References the Mar 31 sync where Adi flagged naming confusion and pushed for a clearer framework.', draftReply:'Confirmed — enterprise-first, fleet operators >500 VINs. Fuse Advanced leads, Rec Engine as the differentiator. Will have a crisp one-pager before Thursday.', mentionedMe:true },
-    { id:'c2', from:'Prabhakaran + Santhosh', section:'Product', subject:'Agent Hub demo prep', preview:'Shared demo doc with Arun directly — @Anish FYI loop', priority:'P1', type:'respond', time:'2h ago', hasAttachment:true, links:['https://motorq.atlassian.net'], summary:'Prabhakaran shared the Agent Hub demo doc with Arun independently without looping product in first. Recurrence of the coordination pattern you flagged. Needs a course-correct message.', draftReply:'Prabha — appreciate the speed. Going forward, let\'s align on demo docs through product before they go to Arun. Can we do a quick 15-min sync before any customer-facing share?', mentionedMe:true },
-    { id:'c3', from:'TCO & Rec Engine daily sync', section:'Product', subject:'DTC decision — not showing in dashboard', preview:'Prathik: yeah for DTC we decided not to sho...', priority:'P1', type:'respond', time:'11:11am', hasAttachment:false, links:[], summary:'Prathik flagged a DTC-related product decision in the daily sync. Needs Anish\'s confirmation on whether to suppress DTC data from the dashboard view or surface it differently.', draftReply:'Prathik — let\'s keep DTC out of the main dashboard view for now, consistent with the Phase 1 scope decision. Can you document the rationale in the PRD comments so it\'s traceable?', mentionedMe:true },
-    { id:'c4', from:'Fuse Rec Engine | Prod | Engg', section:'Product', subject:'Sai — please check', preview:'Sai: Hi Haripriya please check', priority:'P1', type:'respond', time:'6:00am', hasAttachment:false, links:[], summary:'Sai flagged something for Haripriya in the Fuse Rec Engine channel. You were likely looped in as the product owner. Review and determine if a decision is needed from your side.', draftReply:'Looped in — Haripriya can you share the update here once resolved so we can track?', mentionedMe:false },
-    { id:'c5', from:'Vanshika Kochhar', section:'Chats', subject:'Demo portal prompt quality', preview:'You: Awesome, thanks for confirming.', priority:'FYI', type:'fyi', time:'8:57am', hasAttachment:false, links:[], summary:'Vanshika confirmed something in the demo portal prompt quality thread. You already replied. No further action needed — just mark as read.', draftReply:'', mentionedMe:false },
-    { id:'c6', from:'Customer Issues', section:'Chats', subject:'Motorq_Prod_Eng_Ops', preview:'Motorq_Prod_Eng_Ops 9:33am', priority:'P2', type:'respond', time:'9:33am', hasAttachment:false, links:[], summary:'Customer issues channel has an unread update from the ops group. Could be a prod incident or customer escalation — check and determine if PM input is needed.', draftReply:'Reviewing — will flag if product input is needed from my side.', mentionedMe:false },
-    { id:'c7', from:'EFM CS/DS/EngProduct Team', section:'EFM', subject:'Andrew update', preview:'Andrew: Abhinav Reddy Boddu I told them t...', priority:'P2', type:'fyi', time:'11:19am', hasAttachment:false, links:[], summary:'Andrew posted an update in the EFM cross-functional channel, directing Abhinav. FYI for Anish — no direct action needed, but good to be aware of the EFM thread status.', draftReply:'', mentionedMe:false },
-    { id:'c8', from:'Esha Gupta', section:'Product', subject:'Thank you', preview:'Thank you Anish! ❤️', priority:'FYI', type:'fyi', time:'11:16am', hasAttachment:false, links:[], summary:'Esha sent a thank you message. No action needed — a like reaction is sufficient.', draftReply:'', mentionedMe:false },
-    { id:'c9', from:'Weekly AI GTM/Prod/Tech Team Sy...', section:'Customer', subject:'Ian: cc Alex Netto ^^', preview:'Ian: cc: Alex Netto ^^', priority:'P2', type:'respond', time:'4:11am', hasAttachment:false, links:[], summary:'Ian looped in Alex Netto in the Weekly AI GTM sync channel. @everyone tag likely. Needs Anish to check context and respond if the product team needs to act on the GTM thread.', draftReply:'On it — Ian what\'s the action item for product here? Happy to take it.', mentionedMe:false },
-    { id:'c10', from:'On-call Engineering', section:'Active Follow-ups', subject:'Motorq_Prod_Eng_Ops', preview:'...', priority:'FYI', type:'fyi', time:'active', hasAttachment:false, links:[], summary:'On-call engineering channel has an unread. Active follow-up item — check if there is a live incident requiring product coordination.', draftReply:'', mentionedMe:false }
+    { id:'c1', from:'Vivek Malipatil', section:'Favourites', subject:'Fuse positioning', preview:'@Anish can you confirm the enterprise-first sequencing before Thursday', priority:'P1', type:'respond', time:'45m ago', hasAttachment:false, links:[], summary:'Vivek needs you to confirm the enterprise-first positioning for Fuse before Adi\'s Thursday touchpoint. References the Mar 31 sync where Adi flagged naming confusion.', draftReply:'Confirmed — enterprise-first, fleet operators >500 VINs. Fuse Advanced leads, Rec Engine as the differentiator. Will have a one-pager before Thursday.' },
+    { id:'c2', from:'Prabhakaran + Santhosh', section:'Product', subject:'Agent Hub demo prep', preview:'Shared demo doc with Arun directly — @Anish FYI loop', priority:'P1', type:'respond', time:'2h ago', hasAttachment:true, links:['https://motorq.atlassian.net'], summary:'Prabhakaran shared the Agent Hub demo doc with Arun without looping product in first. Recurrence of the coordination pattern you flagged.', draftReply:'Prabha — appreciate the speed. Going forward, let\'s align on demo docs through product before they go to Arun. Quick 15-min sync before any customer-facing share?' },
+    { id:'c3', from:'TCO & Rec Engine daily sync', section:'Product', subject:'DTC decision', preview:'Prathik: yeah for DTC we decided not to sho...', priority:'P1', type:'respond', time:'11:11am', hasAttachment:false, links:[], summary:'Prathik flagged a DTC product decision in the daily sync. Needs your confirmation on whether to suppress DTC from the dashboard.', draftReply:'Let\'s keep DTC out of the main dashboard for now — Phase 1 scope. Prathik can you document the rationale in the PRD comments?' },
+    { id:'c4', from:'Weekly AI GTM/Prod/Tech', section:'Customer', subject:'Ian: cc Alex Netto', preview:'Ian: cc: Alex Netto ^^', priority:'P2', type:'respond', time:'4:11am', hasAttachment:false, links:[], summary:'Ian looped in Alex Netto in the Weekly AI GTM sync. Likely needs product to weigh in on the GTM thread.', draftReply:'On it Ian — what\'s the action item for product here?' },
+    { id:'c5', from:'EFM CS/DS/EngProduct', section:'EFM', subject:'Andrew update', preview:'Andrew: Abhinav Reddy Boddu I told them t...', priority:'P2', type:'fyi', time:'11:19am', hasAttachment:false, links:[], summary:'Andrew posted an update in the EFM cross-functional channel directing Abhinav. FYI for Anish — no direct action needed.', draftReply:'' },
+    { id:'c6', from:'Esha Gupta', section:'Product', subject:'Thank you', preview:'Thank you Anish! ❤️', priority:'FYI', type:'fyi', time:'11:16am', hasAttachment:false, links:[], summary:'Esha sent a thank you. A like reaction is sufficient here.', draftReply:'' },
+    { id:'c7', from:'Vanshika Kochhar', section:'Chats', subject:'Demo portal prompt quality', preview:'You: Awesome, thanks for confirming.', priority:'FYI', type:'fyi', time:'8:57am', hasAttachment:false, links:[], summary:'Vanshika confirmed something in the demo portal thread. You already replied — mark as read.', draftReply:'' },
+    { id:'c8', from:'Customer Issues', section:'Chats', subject:'Motorq_Prod_Eng_Ops', preview:'Motorq_Prod_Eng_Ops 9:33am', priority:'P2', type:'respond', time:'9:33am', hasAttachment:false, links:[], summary:'Customer issues channel has an unread update from the ops group. Could be a prod incident or escalation — check if PM input is needed.', draftReply:'Reviewing — will flag if product input needed from my side.' },
+    { id:'c9', from:'On-call Engineering', section:'Active Follow-ups', subject:'Motorq_Prod_Eng_Ops', preview:'Active follow-up', priority:'FYI', type:'fyi', time:'active', hasAttachment:false, links:[], summary:'On-call engineering channel has an unread. Check for any live incident requiring product coordination.', draftReply:'' },
+    { id:'c10', from:'Fuse Rec Engine | Prod | Engg', section:'Product', subject:'Sai — please check', preview:'Sai: Hi Haripriya please check', priority:'P1', type:'respond', time:'6:00am', hasAttachment:false, links:[], summary:'Sai flagged something for Haripriya in the Fuse Rec Engine channel. You\'re likely looped in as product owner. Review and decide if a decision is needed.', draftReply:'Looped in — Haripriya can you share the update here once resolved so we can track?' }
   ];
 }
 
 // ── Render ────────────────────────────────────────────────────────────────────
 
 function renderSidebar() {
+  log('Rendering sidebar...', 'INFO');
   SECTION_ORDER.forEach(section => {
     const el = document.getElementById('nav-' + section);
     if (!el) return;
     const items = allCases.filter(c => c.section === section);
-    if (!items.length) { el.innerHTML = ''; return; }
     el.innerHTML = items.map(c => navItem(c)).join('');
   });
 }
 
 function navItem(c) {
   const initials = c.from.split(/[\s|,]/)[0].substring(0,2).toUpperCase();
-  const colors = {P1:'#e85547',P2:'#f0873a',FYI:'#5e5c58'};
-  const bgMap = {P1:'rgba(232,85,71,0.18)',P2:'rgba(240,135,58,0.18)',FYI:'#26282c'};
+  const colors = { P1:'#e85547', P2:'#f0873a', FYI:'#5e5c58' };
+  const bgs = { P1:'rgba(232,85,71,0.18)', P2:'rgba(240,135,58,0.18)', FYI:'#26282c' };
   const badgeClass = c.priority === 'P1' ? 'badge-p1' : c.priority === 'P2' ? 'badge-p2' : 'badge-fyi';
   return `<div class="nav-item" id="nav-${c.id}" onclick="selectCase('${c.id}')">
-    <div class="nav-item-left" style="min-width:0">
-      <div class="nav-avatar" style="background:${bgMap[c.priority]};color:${colors[c.priority]}">${initials}</div>
+    <div class="nav-item-left">
+      <div class="nav-avatar" style="background:${bgs[c.priority]};color:${colors[c.priority]}">${initials}</div>
       <div style="min-width:0">
-        <div class="nav-name">${c.from}</div>
-        <div class="nav-preview">${c.preview}</div>
+        <div class="nav-name">${escHtml(c.from)}</div>
+        <div class="nav-preview">${escHtml(c.preview)}</div>
       </div>
     </div>
     <span class="nav-badge ${badgeClass}">${c.priority}</span>
@@ -419,7 +470,7 @@ function navItem(c) {
 }
 
 function renderOverview() {
-  // Stats
+  log('Rendering overview panel...', 'INFO');
   const p1 = allCases.filter(c => c.priority === 'P1').length;
   const respond = allCases.filter(c => c.type === 'respond').length;
   const fyi = allCases.filter(c => c.type === 'fyi').length;
@@ -435,67 +486,52 @@ function renderCases() {
   let data = [...allCases];
   if (activeView === 'respond') data = data.filter(c => c.type === 'respond');
   else if (activeView === 'fyi') data = data.filter(c => c.type === 'fyi');
-
   if (activeFilter !== 'all') {
     if (['P1','P2','FYI'].includes(activeFilter)) data = data.filter(c => c.priority === activeFilter);
     else data = data.filter(c => c.section === activeFilter);
   }
-
-  // Sort: P1 first, then P2, then FYI; within each, section order
-  const pOrder = {P1:0,P2:1,FYI:2};
+  const pOrder = { P1:0, P2:1, FYI:2 };
   const sOrder = {};
   SECTION_ORDER.forEach((s,i) => sOrder[s] = i);
-  data.sort((a,b) => {
-    if (pOrder[a.priority] !== pOrder[b.priority]) return pOrder[a.priority] - pOrder[b.priority];
-    return (sOrder[a.section]||99) - (sOrder[b.section]||99);
-  });
-
+  data.sort((a,b) => pOrder[a.priority] - pOrder[b.priority] || (sOrder[a.section]||99) - (sOrder[b.section]||99));
   if (!data.length) {
     document.getElementById('cases-list').innerHTML = '<div style="padding:40px 0;text-align:center;color:var(--text3);font-family:DM Mono,monospace;font-size:12px">no cases match this filter</div>';
     return;
   }
   document.getElementById('cases-list').innerHTML = data.map(c => caseCard(c)).join('');
+  log(`Displayed ${data.length} cases (view:${activeView} filter:${activeFilter})`, 'INFO');
 }
 
 function caseCard(c) {
-  const pbClass = c.priority === 'P1' ? 'pb-p1' : c.priority === 'P2' ? 'pb-p2' : 'pb-fyi';
-  const typeTag = c.type === 'respond' ? '<span class="tag tag-respond">respond</span>' : '<span class="tag tag-fyi">fyi</span>';
+  const pbClass = c.priority==='P1' ? 'pb-p1' : c.priority==='P2' ? 'pb-p2' : 'pb-fyi';
+  const typeTag = c.type==='respond' ? '<span class="tag tag-respond">respond</span>' : '<span class="tag tag-fyi">fyi</span>';
   const attachTag = c.hasAttachment ? '<span class="tag tag-attach">attachment</span>' : '';
   const sectionTag = `<span class="tag tag-section">${c.section}</span>`;
-
-  const linksHtml = c.links && c.links.length ? c.links.map(l =>
-    `<a class="link-item" href="${l}" target="_blank">↗ ${l.replace('https://','').substring(0,55)}</a>`
-  ).join('') : '';
-
-  const draftSection = c.type === 'respond' && c.draftReply ? `
+  const linksHtml = c.links && c.links.length ? '<div class="links-list">' + c.links.map(l => `<a class="link-item" href="${escHtml(l)}" target="_blank">↗ ${escHtml(l.replace('https://','').substring(0,55))}</a>`).join('') + '</div>' : '';
+  const draftSection = c.type==='respond' && c.draftReply ? `
     <div class="draft-section">
       <div class="draft-label">Draft reply</div>
-      <textarea class="draft-textarea" id="draft-${c.id}">${c.draftReply}</textarea>
+      <textarea class="draft-textarea" id="draft-${c.id}">${escHtml(c.draftReply)}</textarea>
       <div class="action-row">
-        <button class="btn" onclick="improveDraft('${c.id}', this)">✦ Improve</button>
+        <button class="btn" onclick="improveDraft('${c.id}',this)">✦ Improve</button>
         <button class="btn" onclick="copyDraft('${c.id}')">Copy</button>
-        <button class="btn btn-primary" onclick="sendReply('${c.id}', 'teams', this)">Send →</button>
+        <button class="btn btn-primary" onclick="sendReply('${c.id}',this)">Send →</button>
         <button class="btn btn-danger" onclick="snooze('${c.id}')">Snooze</button>
       </div>
       <div class="status-msg" id="status-${c.id}"></div>
     </div>` : '';
-
-  const fyiActions = c.type === 'fyi' ? `
+  const fyiActions = c.type==='fyi' ? `
     <div class="action-row" style="margin-top:12px">
-      <button class="btn btn-green" onclick="reactLike('${c.id}', this)">👍 Like</button>
-      <button class="btn" onclick="markDone('${c.id}')">Mark read</button>
-      <button class="btn btn-danger" onclick="snooze('${c.id}')">Snooze</button>
+      <button class="btn btn-green" onclick="reactLike('${c.id}',this)">👍 Like</button>
+      <button class="btn" onclick="snooze('${c.id}')">Mark read</button>
     </div>` : '';
-
   return `<div class="case-card" id="case-${c.id}">
     <div class="case-header" onclick="toggleCase('${c.id}')">
-      <div class="case-priority-col">
-        <span class="priority-badge ${pbClass}">${c.priority}</span>
-      </div>
+      <div class="case-priority-col"><span class="priority-badge ${pbClass}">${c.priority}</span></div>
       <div class="case-main">
-        <div class="case-from">${c.from}</div>
-        <div class="case-subject">${c.subject}</div>
-        <div class="case-preview">${c.preview}</div>
+        <div class="case-from">${escHtml(c.from)}</div>
+        <div class="case-subject">${escHtml(c.subject)}</div>
+        <div class="case-preview">${escHtml(c.preview)}</div>
         <div class="case-tags">${typeTag}${attachTag}${sectionTag}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:8px">
@@ -506,33 +542,24 @@ function caseCard(c) {
     <div class="case-body">
       <div class="block">
         <div class="block-label">Summary</div>
-        <div class="block-text">${c.summary}</div>
-        ${linksHtml ? '<div class="links-list">' + linksHtml + '</div>' : ''}
+        <div class="block-text">${escHtml(c.summary)}</div>
+        ${linksHtml}
       </div>
-      ${draftSection}
-      ${fyiActions}
+      ${draftSection}${fyiActions}
     </div>
   </div>`;
 }
 
 // ── Interactions ──────────────────────────────────────────────────────────────
 
-function toggleCase(id) {
-  const el = document.getElementById('case-' + id);
-  el.classList.toggle('expanded');
-}
+function toggleCase(id) { document.getElementById('case-'+id).classList.toggle('expanded'); }
 
 function selectCase(id) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navEl = document.getElementById('nav-' + id);
-  if (navEl) navEl.classList.add('active');
-  selectedCaseId = id;
-  // Scroll to and expand in overview
-  const caseEl = document.getElementById('case-' + id);
-  if (caseEl) {
-    caseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    if (!caseEl.classList.contains('expanded')) caseEl.classList.add('expanded');
-  }
+  const nav = document.getElementById('nav-'+id);
+  if (nav) nav.classList.add('active');
+  const el = document.getElementById('case-'+id);
+  if (el) { el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('expanded'); }
 }
 
 function showView(view, el) {
@@ -550,126 +577,93 @@ function applyFilter(filter, el) {
 }
 
 async function improveDraft(id, btn) {
-  const textarea = document.getElementById('draft-' + id);
-  const orig = textarea.value;
-  const statusEl = document.getElementById('status-' + id);
-  btn.disabled = true;
-  btn.textContent = '↻ Improving...';
+  const ta = document.getElementById('draft-'+id);
+  const orig = ta.value;
+  btn.disabled = true; btn.textContent = '↻ Improving...';
   showStatus(id, 'improving...', 'info');
-
+  log(`Improve draft for case ${id}`, 'INFO');
   try {
-    const resp = await fetch(CLAUDE_API, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+    const resp = await withTimeout(fetch(CLAUDE_API, {
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`You write in Anish Namasivayam's voice. He is a senior PM at Motorq. Style rules: direct and brief, no filler phrases like "hope this helps" or "please let me know", action-oriented, gets to the point in the first sentence, lowercase casual tone for internal, slightly more formal for customers. Improve the draft while keeping the exact same intent. Return only the improved draft text, nothing else.`,
-        messages:[{role:'user', content:`Improve this draft reply:\n\n${orig}`}]
+        model:'claude-sonnet-4-20250514', max_tokens:1000,
+        system:'You write in Anish Namasivayam\'s voice: direct, brief, no filler phrases, action-oriented, gets to the point in the first sentence. Return only the improved draft, nothing else.',
+        messages:[{role:'user',content:`Improve this draft:\n\n${orig}`}]
       })
-    });
+    }), 15000, 'improveDraft');
     const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
     const improved = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
-    if (improved) textarea.value = improved;
-    showStatus(id, 'improved ✓', 'ok');
-  } catch(e) {
-    showStatus(id, 'failed — check connection', 'err');
-  }
-  btn.disabled = false;
-  btn.textContent = '✦ Improve';
+    if (improved) { ta.value = improved; showStatus(id,'improved ✓','ok'); log('Draft improved','OK'); }
+  } catch(e) { showStatus(id,`failed: ${e.message}`,'err'); log(`improveDraft error: ${e.message}`,'ERR'); }
+  btn.disabled=false; btn.textContent='✦ Improve';
 }
 
-async function sendReply(id, platform, btn) {
-  const textarea = document.getElementById('draft-' + id);
-  const draft = textarea.value.trim();
+async function sendReply(id, btn) {
+  const ta = document.getElementById('draft-'+id);
+  const draft = ta.value.trim();
   if (!draft) return;
-  const caseItem = allCases.find(c => c.id === id);
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  showStatus(id, 'sending via M365...', 'info');
-
+  const c = allCases.find(x=>x.id===id);
+  btn.disabled=true; btn.textContent='Sending...';
+  showStatus(id,'sending via M365...','info');
+  log(`Send reply for case ${id} to "${c.from}"`, 'INFO');
   try {
-    const resp = await fetch(CLAUDE_API, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+    const resp = await withTimeout(fetch(CLAUDE_API, {
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`You are a Microsoft 365 assistant. Use the M365 MCP tools to send a reply in a Teams chat. Find the conversation with "${caseItem.from}" and send the message. Confirm success with a short message.`,
-        messages:[{role:'user', content:`Send this Teams message to "${caseItem.from}" in the "${caseItem.subject}" conversation:\n\n${draft}`}],
-        mcp_servers:[{type:'url', url:MCP_M365, name:'m365'}]
+        model:'claude-sonnet-4-20250514', max_tokens:1000,
+        system:`Use M365 MCP tools to send a Teams message to "${c.from}" in the "${c.subject}" conversation. Confirm success.`,
+        messages:[{role:'user',content:`Send this Teams message:\n\n${draft}`}],
+        mcp_servers:[{type:'url',url:MCP_M365,name:'m365'}]
       })
-    });
+    }), 20000, 'sendReply');
     const data = await resp.json();
-    const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
-    showStatus(id, 'sent ✓ — case resolved', 'ok');
-    setTimeout(() => { document.getElementById('case-' + id).classList.add('snoozed'); }, 1200);
+    if (data.error) throw new Error(data.error.message);
+    log(`Send response received`, 'OK');
+    showStatus(id,'sent ✓ — case resolved','ok');
+    setTimeout(()=>{ document.getElementById('case-'+id).classList.add('snoozed'); },1200);
   } catch(e) {
-    showStatus(id, 'send failed — copy and paste manually', 'err');
+    showStatus(id,`send failed — copy manually`,'err');
+    log(`sendReply error: ${e.message}`,'ERR');
     copyDraft(id);
   }
-  btn.disabled = false;
-  btn.textContent = 'Send →';
+  btn.disabled=false; btn.textContent='Send →';
 }
 
 function copyDraft(id) {
-  const textarea = document.getElementById('draft-' + id);
-  navigator.clipboard.writeText(textarea.value).catch(()=>{});
-  showStatus(id, 'copied to clipboard ✓', 'ok');
-  setTimeout(() => {
-    const el = document.getElementById('status-' + id);
-    if(el) el.style.display = 'none';
-  }, 2000);
+  const ta = document.getElementById('draft-'+id);
+  navigator.clipboard.writeText(ta.value).catch(()=>{});
+  showStatus(id,'copied ✓','ok');
+  log(`Draft copied for case ${id}`,'OK');
+  setTimeout(()=>{ const el=document.getElementById('status-'+id); if(el) el.style.display='none'; },2000);
 }
 
 function reactLike(id, btn) {
-  btn.textContent = '✓ Liked';
-  btn.disabled = true;
-  showStatus(id, 'like reaction sent', 'ok');
-}
-
-function markDone(id) {
-  document.getElementById('case-' + id).classList.add('snoozed');
+  btn.textContent='✓ Liked'; btn.disabled=true;
+  log(`Like reaction for case ${id}`,'OK');
 }
 
 function snooze(id) {
-  document.getElementById('case-' + id).classList.add('snoozed');
+  document.getElementById('case-'+id).classList.add('snoozed');
+  log(`Case ${id} snoozed`,'INFO');
 }
 
 function showStatus(id, msg, type) {
-  const el = document.getElementById('status-' + id);
+  const el = document.getElementById('status-'+id);
   if (!el) return;
   el.textContent = msg;
   el.className = 'status-msg status-' + type;
-  el.style.display = 'block';
 }
 
-function showGlobalLoading(msg) {
-  document.getElementById('content-area').innerHTML = `
-    <div class="loading-state">
-      <div class="loader"></div>
-      <div class="loading-text">${msg}</div>
-    </div>`;
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function hideGlobalLoading() {
-  // Restore panels to content area
-  const area = document.getElementById('content-area');
-  // Overview and detail panels are still in DOM, just need to display
-}
-
-// Re-attach after clearing innerHTML
-function restoreContentArea() {
-  const area = document.getElementById('content-area');
-  if (!document.getElementById('overview-panel')) {
-    // panels were wiped — full page reload needed; skip for now, handled by not wiping
-  }
-}
-
-// On load
 window.onload = function() {
-  document.getElementById('overview-panel').style.display = 'none';
-  document.getElementById('detail-panel').style.display = 'none';
+  log('Command Centre loaded','OK');
+  log(`Page origin: ${window.location.origin}`,'INFO');
+  log('Ready — click Sync Teams to begin','INFO');
 };
 </script>
 </body>
